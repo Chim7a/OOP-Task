@@ -31,18 +31,23 @@ class TodoList {
       .map((task) => {
         return `<li class="flex justify-between p-2 items-center">
           <span class="font-medium">${task.tasks}</span>
-          <button class="bg-red-800  p-2 rounded-md text-white text-sm">
+          <button id="${task.taskId}" class="delete--btn bg-red-800  p-2 rounded-md text-white text-sm">
             Delete
           </button>
         </li>
             `;
       })
       .join("");
+
+    const deleteBTN = document.querySelectorAll(".delete--btn");
+    deleteBTN.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        this.deleteTask(parseInt(e.target.getAttribute("id")));
+      });
+    });
   }
 
   deleteTask(taskId) {
-    console.log(taskId);
-
     let updatedTask = [];
 
     allTask.map((task) => {
